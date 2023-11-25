@@ -31,6 +31,10 @@ class Nft
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'nfts')]
     private Collection $category;
 
+    #[ORM\ManyToOne(inversedBy: 'nfts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -109,6 +113,18 @@ class Nft
     public function removeCategory(Category $category): static
     {
         $this->category->removeElement($category);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
