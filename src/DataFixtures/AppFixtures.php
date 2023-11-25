@@ -16,12 +16,18 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $users = [];
+        
+
         $faker = \Faker\Factory::create("fr_FR");
         $userAdmin = new User();
         $userAdmin->setEmail("dimitri-bonnet@hotmail.fr");
         $userAdmin->setName("dimitri");
         $userAdmin->setRoles(["ROLE_ADMIN"]);
         $userAdmin->setPassword($this->hash->hashPassword($userAdmin, "test"));
+
+        $users[]=$userAdmin;
+        
 
         $manager->persist($userAdmin);
 
@@ -30,6 +36,8 @@ class AppFixtures extends Fixture
         $userRegular->setName("dim");
         $userRegular->setRoles(["ROLE_USER"]);
         $userRegular->setPassword($this->hash->hashPassword($userRegular, "test"));
+
+        $users[]=$userRegular;
 
         $manager->persist($userRegular);
 
