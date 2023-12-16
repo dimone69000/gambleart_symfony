@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nft index{% endblock %}
+
+{% block body %}
+    <h1>Nft index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ImageUrl</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>DateDrop</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for nft in nfts %}
+            <tr>
+                <td>{{ nft.id }}</td>
+                <td><img src="{{ nft.imageUrl }}" alt="{{nft.name}}"></td>
+                <td>{{ nft.name }}</td>
+                <td>{{ nft.price }}</td>
+                <td>{{ nft.dateDrop ? nft.dateDrop|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_nft_show', {'id': nft.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_nft_new') }}">Create new</a>
+{% endblock %}
