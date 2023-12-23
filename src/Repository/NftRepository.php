@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Nft;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Faker\Core\Number;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @extends ServiceEntityRepository<Nft>
@@ -19,6 +21,16 @@ class NftRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Nft::class);
+    }
+
+    public function getLastNft(int $numberOfNft): array
+    {
+        return $this->createQueryBuilder('nft')
+        ->orderBy('nft.id', 'DESC')
+        ->setMaxResults($numberOfNft)
+        ->getQuery()
+        ->getResult()
+        ;
     }
 
 //    /**
