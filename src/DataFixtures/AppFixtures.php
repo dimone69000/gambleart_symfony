@@ -30,6 +30,7 @@ class AppFixtures extends Fixture
         $userAdmin->setName("dimitri");
         $userAdmin->setRoles(["ROLE_ADMIN"]);
         $userAdmin->setPassword($this->hash->hashPassword($userAdmin, "test"));
+        $userAdmin->setIsVerified(true);
 
         $users[]=$userAdmin;
         
@@ -41,6 +42,7 @@ class AppFixtures extends Fixture
         $userRegular->setName("dim");
         $userRegular->setRoles(["ROLE_USER"]);
         $userRegular->setPassword($this->hash->hashPassword($userRegular, "test"));
+        $userRegular->setIsVerified(false);
 
         $users[]=$userRegular;
 
