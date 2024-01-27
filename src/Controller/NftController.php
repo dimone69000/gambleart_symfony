@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Nft;
 use App\Form\NftType;
 use App\Repository\NftRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +32,7 @@ class NftController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $nft->setDateDrop(new DateTime());
             $entityManager->persist($nft);
             $entityManager->flush();
 
