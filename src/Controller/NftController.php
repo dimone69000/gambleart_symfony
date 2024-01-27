@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/nft')]
 class NftController extends AbstractController
@@ -25,14 +26,15 @@ class NftController extends AbstractController
     }
 
     #[Route('/new', name: 'app_nft_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
         $nft = new Nft();
         $form = $this->createForm(NftType::class, $nft);
         $form->handleRequest($request);
-
+        $user = $security->getUser();
         if ($form->isSubmitted() && $form->isValid()) {
             $nft->setDateDrop(new DateTime());
+            $nft->setUser($user);
             $entityManager->persist($nft);
             $entityManager->flush();
 
