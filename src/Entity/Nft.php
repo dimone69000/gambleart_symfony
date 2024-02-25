@@ -141,4 +141,5 @@ class Nft
 
         return $this;
     }
+    
 }

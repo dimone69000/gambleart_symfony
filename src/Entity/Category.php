@@ -95,4 +95,9 @@ class Category
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return (string) "ID : ". $this->id. " nom : ". $this->name;
+    }
 }
