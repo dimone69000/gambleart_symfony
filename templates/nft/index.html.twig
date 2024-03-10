@@ -27,9 +27,6 @@
                 <td>
                     <a href="{{ path('app_nft_show', {'id': nft.id}) }}">show</a>
                 </td>
-                <td>
-                    <a href="{{ path('app_nft_edit', {'id': nft.id}) }}">edit</a>
-                </td>
             </tr>
         {% else %}
             <tr>
@@ -38,6 +35,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_nft_new') }}">Create new</a>
 {% endblock %}

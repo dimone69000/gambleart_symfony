@@ -7,10 +7,10 @@
 
     <table class="table">
         <tbody>
-            <tr>
+            {# <tr>
                 <th>Id</th>
                 <td>{{ user.id }}</td>
-            </tr>
+            </tr> #}
             <tr>
                 <th>Email</th>
                 <td>{{ user.email }}</td>
@@ -21,6 +21,23 @@
             </tr>
         </tbody>
     </table>
+      <a href="{{ path('app_nft_new') }}">Ajouter un NFT</a>
+    <section>
+    {% for nft in user.nfts %}
+    <div class="card" style="width: 18rem;">
+  <img src={{nft.imageUrl}} class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{nft.name}}</h5>
+    {% for category in nft.category %}
+        <p class="card-text">{{category.name}}</p>
+    {% endfor %}
+    
+    <a href={{path("app_nft_show",{"id":nft.id})}} class="btn btn-primary">Détails</a>
+  </div>
+</div>
+        
+    {% endfor %}
+    </section>
 
     <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
 

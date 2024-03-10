@@ -20,7 +20,6 @@ class Category
     #[ORM\GeneratedValue]
     #[ORM\Column]
     #[Groups(['nfts:read', 'categories:read', 'users:read'])]
-    
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
